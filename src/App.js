@@ -19,9 +19,9 @@ class App extends Component {
     const o1 = new Object();
     console.log({}.prototype===o1._proto_);
     const dom = document.querySelector(".App");
-    this.drag(dom,()=>{
+    this.drag(dom,{end: ()=>{
       console.log("滑动啦！！！");
-    })
+    }})
   }
 
   foo(){
@@ -94,7 +94,7 @@ class App extends Component {
       
     });
     banner.addEventListener('touchmove',(ev)=>{
-      var touch = ev.changedTouches[0];
+      const touch = ev.changedTouches[0];
       
       if(!isY){
         return
@@ -102,11 +102,11 @@ class App extends Component {
       
       
       //定义当前手指位置
-      var nowY = touch.clientY;
-      var disY = nowY - startY;
+      const nowY = touch.clientY;
+      const disY = nowY - startY;
       
-      var nowX = touch.clientX;
-      var disX = nowX - startX;
+      const nowX = touch.clientX;
+      const disX = nowX - startX;
       
       if(isFirst){
         
@@ -118,11 +118,11 @@ class App extends Component {
       }
       
       //限定范围,越来越难拖
-      var translateY = eleY+disY;
+      let translateY = eleY+disY;
       //var minWidth = document.documentElement.clientHeight-bannerList.offsetHeight;
-      var minWidth =	banner.clientHeight - bannerList.offsetHeight;
+      const minWidth =	banner.clientHeight - bannerList.offsetHeight;
       
-      var scale = 0;
+      let scale = 0;
       if(translateY > 0){
 
         //translateY增加，scale减小
@@ -132,7 +132,7 @@ class App extends Component {
         
       }else if(translateY < minWidth){
         //右边的留白区域
-        var over = minWidth - translateY;
+        const over = minWidth - translateY;
         scale = 0.9 - over/document.documentElement.clientHeight;
         
         translateY = minWidth - over*scale;
@@ -155,18 +155,18 @@ class App extends Component {
     });
     //快速滑屏和回弹
     banner.addEventListener('touchend',(ev)=>{
-      var touch = ev.changedTouches[0];
+      const touch = ev.changedTouches[0];
       //速度
-      var speed = disPoint / (nowTime - lastTime) ;
+      const speed = disPoint / (nowTime - lastTime) ;
       
       
-      var target = this.transformCss(bannerList,'translateY') + speed*600;
-      //var minWidth = document.documentElement.clientHeight-bannerList.offsetHeight;
-      var minWidth =	banner.clientHeight - bannerList.offsetHeight;
+      let target = this.transformCss(bannerList,'translateY') + speed*600;
+      //const minWidth = document.documentElement.clientHeight-bannerList.offsetHeight;
+      const minWidth =	banner.clientHeight - bannerList.offsetHeight;
       
       //回弹效果
 
-      var type = 'Linear';
+      let type = 'Linear';
       if(target>0){
         target = 0;
         type = 'easeOut';
@@ -175,17 +175,17 @@ class App extends Component {
         type = 'easeOut';
       };
               
-      var time = 1;
+      const time = 1;
       move(target,type,time);
       
               
     });
     const move = (target,type,time)=>{
-      var t = 0;
-      var b = this.transformCss(bannerList,'translateY');
-      var c = target - b;
+      let t = 0;
+      const b = this.transformCss(bannerList,'translateY');
+      const c = target - b;
       //总次数
-      var d = time/0.02;
+      const d = time/0.02;
       clearInterval(bannerList.timer);
       bannerList.timer = setInterval(()=>{
         t++;
@@ -200,7 +200,7 @@ class App extends Component {
             callback['move']();
           };
           //返回值，每一步的位置
-          var point = Tween[type](t,b,c,d)
+          const point = Tween[type](t,b,c,d)
           this.transformCss(bannerList,'translateY',point);
         }
         
@@ -216,7 +216,7 @@ class App extends Component {
 		}
 		if(arguments.length > 2){
 			node.transform[name]= value;
-			var result = "";
+			let result = "";
 			for (var item in node.transform) {
 				switch (item){
 					case "rotate":
@@ -255,7 +255,7 @@ class App extends Component {
 
   render() {
     let arr = [];
-    for(let i=0; i < 100; i++ ){
+    for(let i=0; i < 200; i++ ){
       arr.push(i+".测试文本");
     }
     const { ActiveIndex, scrollHeight } = this.state;
