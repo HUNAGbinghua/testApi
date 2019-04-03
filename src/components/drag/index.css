@@ -34,3 +34,24 @@
 .activeStyle{
   color: red;
 }
+
+.App{
+  overflow: hidden;
+}
+
+.listWarp{
+  padding: 0;
+  margin: 0;
+}
+
+.footer{
+  position: absolute;
+  left: 0;
+  bottom: -4rem;
+  width: 100%;
+  height: 4rem;
+  line-height: 4rem;
+  text-align: center;
+  font-family: "宋体";
+  color: black;
+}
