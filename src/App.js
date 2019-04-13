@@ -18,7 +18,7 @@ class App extends Component {
     const { activeIndex } = this.state;
     let arr = [];
     for(let i=0; i < 130; i++ ){
-      arr.push(i+".测试文本");
+      arr.push(i+".测试文本");  
     }
     return (
       <div className="warp">
