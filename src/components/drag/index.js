@@ -23,12 +23,12 @@ class Index extends Component {
   callBack(){
     let isBottom = false;
     const wrap = document.querySelector(".App");
-    const content = document.querySelector(".App-header");
+    const content = document.querySelector(".content");
     const footer = document.querySelector(".footer");
     const footerH = footer.offsetHeight;
     return {
       start: ()=>{
-        var minH = content.offsetHeight - wrap.clientHeight - 10,
+        const minH = content.offsetHeight - wrap.clientHeight - 10,
             translateY = this.transformCss(content,"translateY");
         if(Math.abs(translateY)>=minH){
           isBottom = true;
@@ -45,17 +45,17 @@ class Index extends Component {
 					}
       },
       end: ()=>{
-        var minH = content.offsetHeight - wrap.clientHeight - 10,
+        const minH = content.offsetHeight - wrap.clientHeight - 10,
 						translateY = this.transformCss(content,"translateY");
         if(isBottom && ((Math.abs(translateY) - minH)>footerH)){
-          clearInterval(this.timer);
-          this.setState({ footerText: "加载中..." });
-          setTimeout(()=>{
-						var minH = content.offsetHeight - wrap.clientHeight;
-						content.style.transition = "0.5s";
-            this.transformCss(content,"translateY",-minH);
-            this.setState({ footerText: "没有更多的数据啦" });
-					},1000);
+          // clearInterval(this.timer);
+          // this.setState({ footerText: "加载中..." });
+          // setTimeout(()=>{
+					// 	var minH = content.offsetHeight - wrap.clientHeight;
+					// 	content.style.transition = "0.5s";
+          //   this.transformCss(content,"translateY",-minH);
+          //   this.setState({ footerText: "没有更多的数据啦" });
+					// },1000);
         }
       }
     };
@@ -87,12 +87,11 @@ class Index extends Component {
       Linear: (t,b,c,d)=>{ return c*t/d + b; },
       //回弹效果			
       easeOut: (t,b,c,d,s)=>{
-        if (s == undefined) s = 1.70158;
+        if (s === undefined) s = 1.70158;
         return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
       }		
     };
     banner.addEventListener('touchstart',(ev)=>{
-      ev.preventDefault();
       const touch = ev.changedTouches[0];
       clearInterval(this.timer);
       bannerList.style.transition = 'none';
@@ -111,6 +110,7 @@ class Index extends Component {
       isY = true;
     });
     banner.addEventListener('touchmove',(ev)=>{
+      ev.preventDefault(); 
       const touch = ev.changedTouches[0];
       if(!isY){
         return
@@ -252,10 +252,7 @@ class Index extends Component {
     const { children } = this.props;
     return (
       <div className="App" style={{ height: scrollHeight }}>
-        <div className="App-header">
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
+        <div className="content">
           <ul className="listWarp">
             { children }
           </ul>
