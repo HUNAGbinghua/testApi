@@ -53,7 +53,7 @@ class Index extends Component {
     return (
       <div style={{ width: 550, margin: "auto" }}>
         <div style={{ overflow: "hidden" }}>
-          <div style={{ margin: "10px 0" }}><Button type="primary" style={{ width: 100 }} plain onClick={this.addXiaGuaTables}>添加下挂</Button></div>
+          <div style={{ margin: "10px 0", textAlign: "left" }}><Button type="primary" style={{ width: 100 }} plain onClick={this.addXiaGuaTables}>添加下挂</Button></div>
         </div>
         {
           xiaGuaArr.map((item,index)=>(
